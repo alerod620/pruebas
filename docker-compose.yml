@@ -20,6 +20,7 @@ services:
       - ./src:/python-flask
     environment:
       - SEVER_NAME=201404006_
+      - production
     networks:
       - red-servidores
       - red-db
