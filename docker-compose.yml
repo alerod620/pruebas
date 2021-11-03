@@ -18,6 +18,8 @@ services:
     command: python app.py
     expose:
       - "3500"
+    ports:
+      - "3500:3500"
     volumes:
       - ./src:/python-flask
     environment:
