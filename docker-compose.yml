@@ -20,11 +20,14 @@ services:
       - ./src:/python-flask
     environment:
       - SEVER_NAME=201404006_
-      - production
+    volumes:
+      - my-db:/var/lib/mysql
     networks:
       - red-servidores
       - red-db
 
+volumes:
+  my-db:
 networks:
   red-servidores:
     driver: bridge
