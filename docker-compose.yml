@@ -6,7 +6,6 @@ services:
     restart: always
     environment:
       MYSQL_USER: 'grupo16'
-      MYSQL_PASSWORD: '1234'
       MYSQL_ROOT_PASSWORD: '1234'
     networks:
       - red-db
