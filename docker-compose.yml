@@ -3,9 +3,7 @@ services:
   #Mysql container
   db:
     image: mysql:latest
-    restart: always
     environment:
-      MYSQL_USER: 'grupo16'
       MYSQL_ROOT_PASSWORD: '1234'
     ports:
       - "3306:3306"
@@ -15,7 +13,6 @@ services:
   server:
     build: ./
     image: pruebas-server
-    restart: always
     command: python app.py
     expose:
       - "3500"
