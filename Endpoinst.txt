@@ -1,0 +1,61 @@
+*** ASISTENCIA ***
+
+URL = localhost:5000/asistencia
+Metodo = POST
+Ejemplo de entrada:
+
+{
+    "carnet": 201404006,
+    "nombre": "Alejandro",
+    "evento": "Graduacion",
+    "id_evento": 1,
+    "imagen": "base64"
+}
+
+Salida:
+
+{
+    "rows_inserted": 1
+}
+
+*** OBTENER ASISTENCIA POR ID_EVENTO ***
+
+URL = localhost:5000/evento/<id>
+Metodo = GET
+Ejemplo de entrada: (No tiene)
+
+Salida:
+
+{
+	"items": [
+		{
+			"carnet": "201404006",
+            "evento": "Graduacion",
+            "fecha_hora": "11/03/21 13:05:23"
+			"imagen": "base64",
+			"nombre": "Alejandro",
+            "servidor": "1"
+		}
+	]
+}
+
+*** OBTENER ASISTENCIA POR CARNET ***
+
+URL = localhost:5000/carnet/<id>
+Metodo = GET
+Ejemplo de entrada: (No tiene)
+
+Salida:
+
+{
+	"items": [
+		{
+            "evento": "Cierre",
+            "fecha_hora": "11/03/21 13:05:23"
+			"imagen": "base64",
+			"nombre": "Alejandro",
+            "servidor": "1"
+		}
+	]
+}
+
