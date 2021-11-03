@@ -5,6 +5,8 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: '1234'
+    volumes:
+      - my-db:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
@@ -20,8 +22,6 @@ services:
       - ./src:/python-flask
     environment:
       - SEVER_NAME=201404006_
-    volumes:
-      - my-db:/var/lib/mysql
     networks:
       - red-servidores
       - red-db
