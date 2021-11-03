@@ -7,17 +7,16 @@ services:
     environment:
       MYSQL_USER: 'grupo16'
       MYSQL_ROOT_PASSWORD: '1234'
-    volumes:
-      - my-db:/var/lib/mysql
     networks:
       - red-db
   #Servidores escritos en flask
   server:
     build: ./
+    image: pruebas-server
     restart: always
     command: python app.py
     expose:
-      - "3000"    
+      - "3500"
     volumes:
       - ./src:/python-flask
     environment:
@@ -26,16 +25,8 @@ services:
       - red-servidores
       - red-db
 
-volumes:
-  my-db:
 networks:
   red-servidores:
     driver: bridge
-    ipam:
-     config:
-       - subnet: 172.35.76.0/24
   red-db:
     driver: bridge
-    ipam:
-     config:
-       - subnet: 10.10.16.0/24 
