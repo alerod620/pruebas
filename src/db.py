@@ -88,15 +88,44 @@ def insert_asistencia(carnet,nombre,evento,id_evento,imagen,fecha_hora,servidor)
     except:
         return 0
 
+def get_asistencia():
+    mydb.commit()
+    cur = mydb.cursor()
+    cur.execute('''SELECT carnet,
+                    nombre,
+                    evento,
+                    id_evento,
+                    imagen,
+                    fecha_hora,
+                    servidor,
+                    id
+                FROM asistencia ''')
+    reports = cur.fetchall()
+    respuesta = []
+    for report in reports:
+        respuesta.append({
+            "carnet" : report[0],
+            "nombre" : report[1],
+            "evento" : report[2],
+            "id_evento" : report[3],
+            "imagen" : report[4],
+            "fecha_hora": report[5],
+            "servidor": report[6],
+            "id": report[7]
+        })
+    return respuesta
+
 def get_asistencia_evento(id_evento):
     mydb.commit()
     cur = mydb.cursor()
     cur.execute('''SELECT carnet,
-                        nombre,
-                        evento,
-                        imagen,
-                        fecha_hora,
-                        servidor
+                    nombre,
+                    evento,
+                    id_evento,
+                    imagen,
+                    fecha_hora,
+                    servidor,
+                    id
                 FROM asistencia
                 WHERE id_evento = %s ''',(id_evento,))
     reports = cur.fetchall()
@@ -106,9 +135,11 @@ def get_asistencia_evento(id_evento):
             "carnet" : report[0],
             "nombre" : report[1],
             "evento" : report[2],
-            "imagen" : report[3],
-            "fecha_hora": report[4],
-            "servidor" : report[5]
+            "id_evento" : report[3],
+            "imagen" : report[4],
+            "fecha_hora": report[5],
+            "servidor": report[6],
+            "id": report[7]
         })
     return respuesta 
 
@@ -116,22 +147,27 @@ def get_asistencia_carnet(carnet):
     mydb.commit()
     cur = mydb.cursor()
     cur.execute('''SELECT carnet,
-                        nombre,
-                        evento,
-                        imagen,
-                        fecha_hora,
-                        servidor
+                    nombre,
+                    evento,
+                    id_evento,
+                    imagen,
+                    fecha_hora,
+                    servidor,
+                    id
                 FROM asistencia
                 WHERE carnet = %s ''',(carnet,))
     reports = cur.fetchall()
     respuesta = []
     for report in reports:
         respuesta.append({
+            "carnet" : report[0],
             "nombre" : report[1],
             "evento" : report[2],
-            "imagen" : report[3],
-            "fecha_hora": report[4],
-            "servidor" : report[5]
+            "id_evento" : report[3],
+            "imagen" : report[4],
+            "fecha_hora": report[5],
+            "servidor": report[6],
+            "id": report[7]
         })
     return respuesta 
 

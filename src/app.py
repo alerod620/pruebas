@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash,make_response,jsonify
-from db import insert_asistencia, insert_report,get_reports,get_reports_from, get_asistencia_evento, get_asistencia_carnet
+from db import insert_asistencia, insert_report,get_reports,get_reports_from, get_asistencia_evento, get_asistencia_carnet, get_asistencia
 from flask_cors import CORS
 import os
 import time
@@ -44,30 +44,37 @@ def reports(id):
         response.headers["Content-Type"] = "application/json"
         return response        
 
-@app.route(r'/asistencia', methods=['POST'])
+@app.route(r'/asistencia', methods=['POST', 'GET'])
 def asistencia():
-    content = request.get_json()
-    carnet = content['carnet']
-    nombre = content['nombre']
-    evento = content['evento']
-    id_evento = content['id_evento']
-    imagen = content['imagen']
-    fecha_hora = time.strftime("%x") + " " + time.strftime("%X")
-    servidor = os.environ['SEVER_NAME']
+    if request.method == 'POST':
+        content = request.get_json()
+        carnet = content['carnet']
+        nombre = content['nombre']
+        evento = content['evento']
+        id_evento = content['id_evento']
+        imagen = content['imagen']
+        fecha_hora = time.strftime("%x") + " " + time.strftime("%X")
+        servidor = os.environ['SEVER_NAME']
 
-    rows_inserted = insert_asistencia(
-        carnet,
-        nombre,
-        evento,
-        id_evento,
-        imagen,
-        fecha_hora,
-        servidor
-    )
-    response = make_response(
-    jsonify({"rows_inserted": rows_inserted}),200,)
-    response.headers["Content-Type"] = "application/json"
-    return response
+        rows_inserted = insert_asistencia(
+            carnet,
+            nombre,
+            evento,
+            id_evento,
+            imagen,
+            fecha_hora,
+            servidor
+        )
+        response = make_response(
+        jsonify({"rows_inserted": rows_inserted}),200,)
+        response.headers["Content-Type"] = "application/json"
+        return response
+    elif request.method == 'GET':
+        body = get_asistencia()
+        response = make_response(
+        jsonify({"items": body}),200,)
+        response.headers["Content-Type"] = "application/json"
+        return response
 
 @app.route(r'/evento/<id>', methods=['GET'])
 def asistencia_evento(id):
